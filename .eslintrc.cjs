@@ -15,6 +15,7 @@ module.exports = {
         'max': 1,
       },
     }],
+    'vue/html-self-closing': 0,
     'vue/singleline-html-element-content-newline': 0,
     'indent': ['warn', 2],
     'semi': ['warn', 'always'],

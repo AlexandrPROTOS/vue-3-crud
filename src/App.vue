@@ -1,21 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import PageFooter from '@/components/PageFooter.vue';
+import PageHeader from '@/components/PageHeader.vue';
+import { RouterView } from 'vue-router';
+</script>
+
+<script setup>
+
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink :to="{ name: 'about' }">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <PageHeader />
+  <main class="main main-container">
+    <RouterView />
+  </main>
+  <PageFooter />
 </template>
 
 <style lang="scss" scoped>
-
 </style>
