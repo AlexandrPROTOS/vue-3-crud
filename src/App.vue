@@ -16,5 +16,18 @@ import { RouterView } from 'vue-router';
   <PageFooter />
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+main{
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.view-header{
+  margin: 0;
+  padding: 0;
+  font-size: 31px;
+  line-height: 36px;
+  color: rgb(0 0 0 );
+}
 </style>
