@@ -4,10 +4,6 @@ import PageHeader from '@/components/PageHeader.vue';
 import { RouterView } from 'vue-router';
 </script>
 
-<script setup>
-
-</script>
-
 <template>
   <PageHeader />
   <main class="main main-container">
@@ -20,7 +16,9 @@ import { RouterView } from 'vue-router';
 main{
   display: flex;
   flex-direction: column;
-  margin-top: 48px;
+  width: 100%;
+  padding-top:  98px;
+  padding-bottom: 100px;
 }
 
 .view-header{

@@ -20,6 +20,10 @@ import { RouterLink } from 'vue-router';
 
 <style lang="scss" scoped>
 .header{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: white;
   box-shadow: 0 0 5px 2px rgb(100 100 111 / 0.2);
 }
 
@@ -62,6 +66,11 @@ color: rgb(51 51 51 / 1)
 .router-link-active{
   color: rgb(0 0 139 / 1);
   border-bottom: 1px solid rgb(0 0 139 / 1);
+}
+
+.header__link-a:hover{
+  border-bottom: 1px solid rgb(0 0 0);
+  transition: 0.15s ease;
 }
 
 

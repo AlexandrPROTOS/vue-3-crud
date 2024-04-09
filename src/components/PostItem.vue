@@ -1,17 +1,29 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 
+defineProps({
+  post: {
+    type: Object,
+    required: true,
+    validator(id, title, body, userId) {
+      id > 0,
+      title === String,
+      body === String,
+      userId > 0;
+    },
+  },
+});
+
 </script>
 
 <template>
   <li class="posts-view__item post">
-    <RouterLink to="/postDetails" class="post__router-link">
+    <RouterLink :to="`/post/${post.id}`" class="post__router-link">
       <h3 class="post__name">
-        sunt aut facere repellat provident occaecati
-        excepturi optio reprehenderit
+        {{ post.title }}
       </h3>
-      <p class="post__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor accusantium eius commodi modi est voluptatibus veniam maxime. Illo ab vel odio neque delectus molestiae, repellat aperiam facilis architecto doloremque nulla?</p>
-      <p class="post__id">user id:<span> 1</span></p>
+      <p class="post__text">{{ post.body }}</p>
+      <p class="post__id">user id:<span>{{ post.userId }}</span></p>
     </RouterLink>
   </li>
 </template>
@@ -31,6 +43,12 @@ import { RouterLink } from 'vue-router';
     color: black;
     cursor: pointer;
     border: 1px solid rgb(170 170 170);
+  }
+
+  &__router-link:hover{
+    border: 1px solid rgb(0 0 0);
+    box-shadow: 0 2px 8px 0 rgba(99 99 99 / 0.2);
+    transition: 0.15s ease;
   }
 
   &__name,

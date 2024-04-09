@@ -40,10 +40,7 @@ import TaskItem from '@/components/TaskItem.vue';
     </div>
 
     <ul class="tasks-view__list">
-      <TaskItem />
-      <TaskItem />
-      <TaskItem />
-      <TaskItem />
+      <TaskItem v-for="item in [1, 2, 3]" :key="item" />
     </ul>
   </div>
 </template>

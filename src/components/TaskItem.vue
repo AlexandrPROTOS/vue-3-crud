@@ -30,6 +30,12 @@
     text-decoration: none;
   }
 
+  &__router-link:hover{
+    border: 1px solid rgb(0 0 0);
+    box-shadow: 0 2px 8px 0 rgba(99 99 99 / 0.2);
+    transition: 0.15s ease;
+  }
+
   &__router-link:visited{
     color: black;
   }
@@ -67,6 +73,11 @@
   }
 
   &__btn-edit{
+    color: rgb(51 51 51);
+  }
+
+  &__btn-edit:hover{
+    text-decoration: underline;
     color: black;
   }
 }
