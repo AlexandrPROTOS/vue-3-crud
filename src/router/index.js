@@ -23,7 +23,7 @@ const router = createRouter({
       component: PostDetails,
     },
     {
-      path: '/taskDetails',
+      path: '/taskDetails/:id',
       name: 'taskDetails',
       component: TaskDetails,
     },

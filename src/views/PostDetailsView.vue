@@ -1,30 +1,49 @@
 <script setup>
+import { fetchPost } from '@/api/post';
 import {ref} from 'vue';
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
-
-console.log(route.params.id);
-
+const isLoading = ref(false);
 const post = ref({});
 
-const fetchPost = async (postId) => {
-  
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
-  const result = await response.json();
-  post.value = result;
+const loadPost =  () => {
+  const postId = route.params.id;
+  isLoading.value = true;
+  setTimeout(async () => {
+    const result = await fetchPost(postId);
+    post.value = result;
+    isLoading.value = false;
+  }, 500);
 };
 
-fetchPost(route.params.id);
+loadPost();
 </script>
 
 <template>
-  <h2
-    class="view-header"
+  <h2 class="view-header">Детальная страница поста</h2>
+
+  <el-skeleton
+    animated
+    v-if="isLoading"
+    class="skeleton-detail"
   >
-    Детальная страница поста
-  </h2>
-  <div class="post-details">
+    <template #template>
+      <el-skeleton-item class="skeleton-detail__title" />
+
+      <div class="skeleton-detail__body">
+        <el-skeleton-item
+          class="skeleton-detail__body-item"
+          v-for="n in 3"
+          :key="n"
+        />
+      </div>
+
+      <el-skeleton-item class="skeleton-detail__id" />
+    </template>
+  </el-skeleton>
+
+  <div class="post-details" v-else>  
     <h3 class="post-details__title">Title: {{ post.title }}</h3>
     <p class="post-details__body">Body: {{ post.body }}</p>
     <p class="post-details__id">user id: {{ post.userId }}</p>
@@ -32,7 +51,6 @@ fetchPost(route.params.id);
 </template>
 
 <style lang="scss" scoped>
-
 .post-details{
   display: flex;
   flex-direction: column;
@@ -64,4 +82,38 @@ fetchPost(route.params.id);
   }
 }
 
+.skeleton-detail{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30.5px;
+
+  &__title{
+    height: 21px;
+    max-width: 700px;
+  }
+
+  &__body{
+    max-width: 783px;
+    margin-top: 24.5px;
+  }
+
+  &__body-item{
+    height: 20px;
+
+    &:not(:first-child){
+      margin-top: 2px;
+    }
+
+    &:last-of-type{
+      width: 30%;
+    }
+  }
+
+  &__id{
+    width: 60px;
+    height: 16px;
+    margin-top: 16px;
+    align-self: flex-end;
+  }
+}
 </style>

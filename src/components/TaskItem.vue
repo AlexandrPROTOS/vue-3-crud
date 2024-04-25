@@ -1,43 +1,50 @@
 <script setup>
-
+defineProps({
+  task: {
+    type: Object,
+    required: true,
+    validator({id, title, isDone, isFavorite}) {
+      return id !== undefined
+        && typeof title === 'string'
+        && typeof isDone === 'boolean'
+        && typeof isFavorite === 'boolean';
+    },
+  },
+});
 </script>
 
 <template>
-  <li class="tasks-view__item task">
-    <RouterLink to="/taskDetails" class="task__router-link">
-      <div class="task__line1">
-        <h3 class="task__name">Проверить почту</h3>
-        <ElButton size="large" class="task__btn-favorite" />
-      </div>
-      <div class="task__line2">
-        <el-button type="text" class="task__btn-edit">Редактировать</el-button>
-        <el-button type="danger">Удалить</el-button>
-      </div>
-    </RouterLink>
+  <li
+    class="tasks-view__item task"
+    :class="{'task--done': task.isDone, 'task--favorite': task.isFavorite}"
+  >
+    <div
+      class="task__line1"
+    >
+      <h3 class="task__name">{{ task.title }}</h3>
+      <ElButton size="large" class="task__btn-favorite" />
+    </div>
+    <div class="task__line2">
+      <RouterLink :to="`/taskDetails/${task.id}`" class="task__router-link">Редактировать</RouterLink>
+      <el-button type="danger" class="task__btn-delete">Удалить</el-button>
+    </div>
   </li>
 </template>
 
 <style lang="scss" scoped>
 
 .task{
+  display: flex;
+  flex-direction: column;
+  min-height: 118px;
+  padding: 17px;
   border: 1px solid rgb(170 170 170);
 
-  &__router-link{
-    display: flex;
-    flex-direction: column;
-    min-height: 118px;
-    padding: 17px;
-    text-decoration: none;
-  }
-
-  &__router-link:hover{
+  &:hover{
+    cursor: pointer;
     border: 1px solid rgb(0 0 0);
     box-shadow: 0 2px 8px 0 rgba(99 99 99 / 0.2);
     transition: 0.15s ease;
-  }
-
-  &__router-link:visited{
-    color: black;
   }
 
   &__line1,
@@ -72,15 +79,57 @@
   margin-top: 12px;
   }
 
-  &__btn-edit{
-    color: rgb(51 51 51);
+  &__router-link{
+    height: fit-content;
+    font-size: 16px;
+    line-height: 18.4px;
+    text-decoration: none;
+    align-self: center;
   }
 
-  &__btn-edit:hover{
-    text-decoration: underline;
+  &__router-link:hover{
+  border-bottom: 1px solid rgb(0 0 0);
+  transition: 0.15s ease;
+  }
+
+  &__router-link:visited{
     color: black;
   }
-}
+  
+  &--done {
+    border-color: rgb(144 238 144);
 
+    &:hover{
+      border-color: rgb(144 238 144);
+    }
+
+    .task {
+      &__name{
+        color: rgb(144 238 144);
+      }
+
+      &__router-link {
+        &:hover{
+          border-color: rgb(170 170 170); 
+        }
+
+        &:visited{
+          color: rgb(170 170 170);
+        }
+      }
+
+      &__btn-delete{
+        opacity: 0.8;
+      }
+    }
+
+  }
+
+  &--favorite {
+    .task__btn-favorite{
+      background-image: url('../assets/icons/isfavoriteTrue.svg');
+    }
+  }
+}
 
 </style>

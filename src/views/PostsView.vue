@@ -1,42 +1,49 @@
 <script setup>
+import { POSTS_PER_PAGE } from '@/api/post';
+import { fetchPosts } from '@/api/post';
 import PostItem from '@/components/PostItem.vue';
-import { ref } from 'vue'; 
+import SkeletonItem from '@/components/SkeletonItem.vue';
+import { ref } from 'vue';
 
-const postsPagesNext = ref(1);
-const fromPost = ref(0);
-const toPost = ref(4);
+const isLoading = ref(false);
+const nextPostsPage = ref(1);
 
 const posts =ref([]);
 
-const fetchPosts = async () => {
-  const API_POSTS_BASE_URL = `https://jsonplaceholder.typicode.com/posts?_start=${fromPost.value}&_end=${toPost.value}`;
-  const response = await fetch(API_POSTS_BASE_URL);
-  const result = await response.json();
-  result.forEach(post => {
-    posts.value.push(post);  
-  });
-};
- 
+const loadNextPage = async () => {
+  isLoading.value = true;
+  const endPost = nextPostsPage.value * POSTS_PER_PAGE;
+  const startPost = endPost - 4;
 
-const AddPostsAndIncreasePages = () => {
-  fetchPosts();
-  postsPagesNext.value+=1;
-  fromPost.value+=4;
-  toPost.value+=4;
+  setTimeout(async () => {
+    const result = await fetchPosts(startPost, endPost);
+    result.forEach(post => {
+      posts.value.push(post);  
+    });
+    isLoading.value = false;
+    nextPostsPage.value+=1;
+  }, 500);
 };
 
-AddPostsAndIncreasePages();
-
+loadNextPage();
 </script>
 
-]<template>
+<template>
   <h2 class="view-header posts-view">Получение списка всех постов</h2>
 
   <ul class="posts-view__list">
     <PostItem
+      class="posts-view__item"
       v-for="post in posts"
       :key="post.id"
       :post="post"
+    />
+
+    <SkeletonItem 
+      class="posts-view__item"
+      v-for="n in POSTS_PER_PAGE" 
+      :key="n" 
+      v-show="isLoading"
     />
   </ul>
   
@@ -44,14 +51,14 @@ AddPostsAndIncreasePages();
     type="primary"
     size="large"
     class="posts-view__btn"
-    @click="AddPostsAndIncreasePages"
+    :loading="isLoading"
+    @click="loadNextPage"
   >
-    <span>Загрузить страницу <span>{{ postsPagesNext }}</span></span>
+    Загрузить страницу {{ nextPostsPage }}
   </el-button>
 </template>
 
 <style lang="scss" scoped>
-
 .posts-view{
   &__list{
     display: flex;
@@ -63,15 +70,15 @@ AddPostsAndIncreasePages();
     gap: 20px;
   }
 
+  &__item {
+    width: calc(50% - 10px);
+  }
+
   &__btn{
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
     cursor: pointer;
   }
-
 }
-
-
-
 </style>

@@ -25,53 +25,51 @@ import { RouterLink } from 'vue-router';
   width: 100vw;
   background-color: white;
   box-shadow: 0 0 5px 2px rgb(100 100 111 / 0.2);
-}
 
-.header__main-container{
-  display: flex;
-  align-items: center ;
-  justify-content: space-between;
-  height: 50px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
+  &__main-container{
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+    height: 50px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 
-.header__main-name{
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  line-height: 18.4px;
-  font-weight: 400;
-  text-align: center;
-  color: rgb(0 0 0 / 1);
-}
+  &__main-name{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 18.4px;
+    font-weight: 400;
+    text-align: center;
+    color: rgb(0 0 0 / 1);
+  }
 
-.header__links-list{
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap:10px ;
-}
+  &__links-list{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap:10px ;
+  }
 
-.header__link{
-  padding:3px 8px 4px;
-}
+  &__link{
+    padding:3px 8px 4px;
+  }
 
-.header__link-a{
-text-decoration: none;
-color: rgb(51 51 51 / 1)
+  &__link-a{
+    text-decoration: none;
+    color: rgb(51 51 51 / 1)
+  }
+
+  &__link-a:hover{
+    border-bottom: 1px solid rgb(0 0 0);
+    transition: 0.15s ease;
+  }
 }
 
 .router-link-active{
   color: rgb(0 0 139 / 1);
   border-bottom: 1px solid rgb(0 0 139 / 1);
 }
-
-.header__link-a:hover{
-  border-bottom: 1px solid rgb(0 0 0);
-  transition: 0.15s ease;
-}
-
-
 </style>

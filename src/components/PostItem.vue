@@ -5,25 +5,22 @@ defineProps({
   post: {
     type: Object,
     required: true,
-    validator(id, title, body, userId) {
-      id > 0,
-      title === String,
-      body === String,
-      userId > 0;
+    validator({ id, title, body, userId }) {
+      return id !== undefined
+        && userId !== undefined
+        && title.length && typeof title === 'string'
+        && body.length && typeof body === 'string';
     },
   },
 });
-
 </script>
 
 <template>
-  <li class="posts-view__item post">
+  <li class="post">
     <RouterLink :to="`/post/${post.id}`" class="post__router-link">
-      <h3 class="post__name">
-        {{ post.title }}
-      </h3>
+      <h3 class="post__name">{{ post.title }}</h3>
       <p class="post__text">{{ post.body }}</p>
-      <p class="post__id">user id:<span>{{ post.userId }}</span></p>
+      <p class="post__id">user id: {{ post.userId }}</p>
     </RouterLink>
   </li>
 </template>
@@ -31,8 +28,6 @@ defineProps({
 <style lang="scss" scoped>
 
 .post{
-  width: calc(50% - 10px);
-
   &__router-link{
     display: flex;
     flex-direction: column;
@@ -58,8 +53,20 @@ defineProps({
     padding: 0;
   }
 
+  &__name{
+    font-size: 17px;
+    line-height: 22px;
+  }
+
+  &__text{
+    font-size: 14px;
+    line-height: 20px;
+  }
+
   &__id{
     margin-left: auto;
+    font-size: 13px;
+    line-height: 16px;
   }
 }
 

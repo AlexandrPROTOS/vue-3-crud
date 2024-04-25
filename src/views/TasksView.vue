@@ -1,19 +1,13 @@
 <script setup>
 import TaskItem from '@/components/TaskItem.vue';
+import {todosMock} from '@/mocks/todos.js';
+
 </script>
 
 <template>
-  <h2 class="view-header tasks-view">CRUD задачи</h2>
+  <h2 class="view-header">CRUD задачи</h2>
 
-  <div class="tasks-view__box">
-    <el-button
-      type="primary"
-      size="default"
-      class="tasks-view__btn"
-    >
-      Добавить задачу
-    </el-button>
-
+  <div class="tasks-view">
     <div class="tasks-view__control">
       <div class="tasks-view__control-checkboxes">
         <ElCheckbox 
@@ -40,28 +34,29 @@ import TaskItem from '@/components/TaskItem.vue';
     </div>
 
     <ul class="tasks-view__list">
-      <TaskItem v-for="item in [1, 2, 3]" :key="item" />
+      <TaskItem
+        v-for="task in todosMock"
+        :key="task.id"
+        :task="task"
+      />
     </ul>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
 .tasks-view{
-  &__box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 28px;
-    margin-right: auto;
-    margin-left: auto;
-    gap: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 28px;
+  margin-right: auto;
+  margin-left: auto;
+  gap: 20px;
+
 
   &__btn{
-    margin-right: auto;
     margin-left: auto;
   }
 
@@ -96,5 +91,4 @@ import TaskItem from '@/components/TaskItem.vue';
 .btn__task-edit{
   margin-right: 0;
 }
-
 </style>
