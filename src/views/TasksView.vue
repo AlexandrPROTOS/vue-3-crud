@@ -1,6 +1,9 @@
 <script setup>
 import TaskItem from '@/components/TaskItem.vue';
-import {todosMock} from '@/mocks/todos.js';
+import {useToDosStore} from '@/stores/ToDosStore';
+
+const toDosStore = useToDosStore();
+
 
 </script>
 
@@ -15,12 +18,14 @@ import {todosMock} from '@/mocks/todos.js';
           label="Выполнено"
           border
           class="tasks-view__checkbox"
+          v-model="toDosStore.activeFilter.isDone"
         />
         <ElCheckbox
           size="default"
           label="Избранное"
           border
           class="tasks-view__checkbox"
+          v-model="toDosStore.activeFilter.isFavorite"
         />
       </div>
       
@@ -28,19 +33,62 @@ import {todosMock} from '@/mocks/todos.js';
         type="primary"
         size="default"
         class="tasks-view__btn btn__task-edit"
+        @click="toDosStore.activeModal.createModal = true"
       >
-        Добавить задачу
+        Создать задачу
       </el-button>
     </div>
 
     <ul class="tasks-view__list">
       <TaskItem
-        v-for="task in todosMock"
+        v-for="task in toDosStore.filteredToDos"
         :key="task.id"
         :task="task"
+        @click="toDosStore.toggleIsDone(task.id)"
       />
     </ul>
   </div>
+
+  <el-dialog
+    v-model="toDosStore.activeModal.deleteModal"
+    center
+    width="500"
+  >
+    <template #header> 
+      <p>Точно удалить задачу "{{ toDosStore.activeModal.task.title }}" ?</p>
+    </template>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="danger" @click="toDosStore.deleteToDo()">
+          Удалить
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+  <el-dialog
+    v-model="toDosStore.activeModal.createModal"
+    title="Создать новую задачу"
+    width="500"
+  >
+    <template #footer>
+      <div class="dialog-footer">
+        <form>
+          <ElInput placeholder="Введите название задачи" v-model="toDosStore.activeModal.task.title" />
+          <ElCheckbox
+            size="default"
+            label="Избранное"
+            border
+            class="tasks-view__checkbox"
+            @click="toDosStore.activeModal.task.isFavorite = !toDosStore.activeModal.task.isFavorite"
+          />
+        </form>
+        <el-button type="primary" @click="toDosStore.createToDo()">
+          Confirm
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <style lang="scss" scoped>

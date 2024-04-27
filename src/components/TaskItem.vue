@@ -1,4 +1,8 @@
 <script setup>
+import {useToDosStore} from '@/stores/ToDosStore';
+
+const toDosStore = useToDosStore();
+
 defineProps({
   task: {
     type: Object,
@@ -22,11 +26,17 @@ defineProps({
       class="task__line1"
     >
       <h3 class="task__name">{{ task.title }}</h3>
-      <ElButton size="large" class="task__btn-favorite" />
+      <ElButton size="large" class="task__btn-favorite" @click.stop="toDosStore.toggleIsFavorite(task.id)" />
     </div>
     <div class="task__line2">
-      <RouterLink :to="`/taskDetails/${task.id}`" class="task__router-link">Редактировать</RouterLink>
-      <el-button type="danger" class="task__btn-delete">Удалить</el-button>
+      <RouterLink 
+        :to="`/taskDetails/${task.id}`" 
+        class="task__router-link" 
+        @click.stop="toDosStore.activeModal.task = {...task}"
+      >
+        Редактировать
+      </RouterLink>
+      <el-button type="danger" class="task__btn-delete" @click.stop="toDosStore.openModalDelete(task)">Удалить</el-button>
     </div>
   </li>
 </template>
