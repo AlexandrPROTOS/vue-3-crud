@@ -15,6 +15,8 @@ defineProps({
     },
   },
 });
+
+defineEmits(['clickDelete']);
 </script>
 
 <template>
@@ -22,9 +24,7 @@ defineProps({
     class="tasks-view__item task"
     :class="{'task--done': task.isDone, 'task--favorite': task.isFavorite}"
   >
-    <div
-      class="task__line1"
-    >
+    <div class="task__line1">
       <h3 class="task__name">{{ task.title }}</h3>
       <ElButton size="large" class="task__btn-favorite" @click.stop="toDosStore.toggleIsFavorite(task.id)" />
     </div>
@@ -32,11 +32,17 @@ defineProps({
       <RouterLink 
         :to="`/taskDetails/${task.id}`" 
         class="task__router-link" 
-        @click.stop="toDosStore.activeModal.task = {...task}"
+        @click.stop
       >
         Редактировать
       </RouterLink>
-      <el-button type="danger" class="task__btn-delete" @click.stop="toDosStore.openModalDelete(task)">Удалить</el-button>
+      <el-button
+        type="danger"
+        class="task__btn-delete"
+        @click.stop="$emit('clickDelete', task)"
+      >
+        Удалить
+      </el-button>
     </div>
   </li>
 </template>
@@ -95,6 +101,7 @@ defineProps({
     line-height: 18.4px;
     text-decoration: none;
     align-self: center;
+    color: black;
   }
 
   &__router-link:hover{

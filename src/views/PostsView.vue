@@ -3,29 +3,29 @@ import { POSTS_PER_PAGE } from '@/api/post';
 import { fetchPosts } from '@/api/post';
 import PostItem from '@/components/PostItem.vue';
 import SkeletonItem from '@/components/SkeletonItem.vue';
+import { usePostsStore } from '@/stores/PostsStore';
 import { ref } from 'vue';
 
+const postsStore = usePostsStore();
 const isLoading = ref(false);
-const nextPostsPage = ref(1);
-
-const posts =ref([]);
 
 const loadNextPage = async () => {
   isLoading.value = true;
-  const endPost = nextPostsPage.value * POSTS_PER_PAGE;
+  const endPost = postsStore.pagesCount * POSTS_PER_PAGE;
   const startPost = endPost - 4;
 
   setTimeout(async () => {
     const result = await fetchPosts(startPost, endPost);
-    result.forEach(post => {
-      posts.value.push(post);  
-    });
+    postsStore.posts.push(...result);
     isLoading.value = false;
-    nextPostsPage.value+=1;
+    postsStore.pagesCount+=1;
   }, 500);
 };
 
-loadNextPage();
+if (!postsStore.posts.length) {
+  loadNextPage();
+}
+
 </script>
 
 <template>
@@ -34,7 +34,7 @@ loadNextPage();
   <ul class="posts-view__list">
     <PostItem
       class="posts-view__item"
-      v-for="post in posts"
+      v-for="post in postsStore.posts"
       :key="post.id"
       :post="post"
     />
@@ -54,7 +54,7 @@ loadNextPage();
     :loading="isLoading"
     @click="loadNextPage"
   >
-    Загрузить страницу {{ nextPostsPage }}
+    Загрузить страницу {{ postsStore.pagesCount }}
   </el-button>
 </template>
 

@@ -1,14 +1,26 @@
 <script setup>
 import TaskItem from '@/components/TaskItem.vue';
+import ToDoCreateModal from '@/components/ToDoCreateModal.vue'; 
+import ToDoDeleteModal from '@/components/ToDoDeleteModal.vue';
 import {useToDosStore} from '@/stores/ToDosStore';
+import { ref } from 'vue';
 
 const toDosStore = useToDosStore();
 
+const deleteModal = ref(null);
+const createModal = ref(null);
 
+const handleClickDelete = (task) => {
+  deleteModal.value.openDeleteModal(task);
+};
+
+const handleClickCreate = () => {
+  createModal.value.openCreateModal();
+};
 </script>
 
 <template>
-  <h2 class="view-header">CRUD задачи</h2>
+  <h1 class="view-header">CRUD задачи</h1>
 
   <div class="tasks-view">
     <div class="tasks-view__control">
@@ -33,7 +45,7 @@ const toDosStore = useToDosStore();
         type="primary"
         size="default"
         class="tasks-view__btn btn__task-edit"
-        @click="toDosStore.activeModal.createModal = true"
+        @click="handleClickCreate"
       >
         Создать задачу
       </el-button>
@@ -41,54 +53,17 @@ const toDosStore = useToDosStore();
 
     <ul class="tasks-view__list">
       <TaskItem
-        v-for="task in toDosStore.filteredToDos"
-        :key="task.id"
-        :task="task"
-        @click="toDosStore.toggleIsDone(task.id)"
+        v-for="item in toDosStore.filteredToDos"
+        :key="item.id"
+        :task="item"
+        @click="toDosStore.toggleIsDone(item.id)"
+        @clickDelete="handleClickDelete"
       />
     </ul>
   </div>
 
-  <el-dialog
-    v-model="toDosStore.activeModal.deleteModal"
-    center
-    width="500"
-  >
-    <template #header> 
-      <p>Точно удалить задачу "{{ toDosStore.activeModal.task.title }}" ?</p>
-    </template>
-    <template #footer>
-      <div class="dialog-footer">
-        <el-button type="danger" @click="toDosStore.deleteToDo()">
-          Удалить
-        </el-button>
-      </div>
-    </template>
-  </el-dialog>
-
-  <el-dialog
-    v-model="toDosStore.activeModal.createModal"
-    title="Создать новую задачу"
-    width="500"
-  >
-    <template #footer>
-      <div class="dialog-footer">
-        <form>
-          <ElInput placeholder="Введите название задачи" v-model="toDosStore.activeModal.task.title" />
-          <ElCheckbox
-            size="default"
-            label="Избранное"
-            border
-            class="tasks-view__checkbox"
-            @click="toDosStore.activeModal.task.isFavorite = !toDosStore.activeModal.task.isFavorite"
-          />
-        </form>
-        <el-button type="primary" @click="toDosStore.createToDo()">
-          Confirm
-        </el-button>
-      </div>
-    </template>
-  </el-dialog>
+  <ToDoDeleteModal ref="deleteModal" />
+  <ToDoCreateModal ref="createModal" />
 </template>
 
 <style lang="scss" scoped>

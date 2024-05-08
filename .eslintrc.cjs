@@ -16,6 +16,9 @@ module.exports = {
       },
     }],
     'vue/singleline-html-element-content-newline': 0,
+    'vue/v-on-event-hyphenation': ['error', 'never', {
+      'autofix': true,
+    }],
     'indent': ['warn', 2],
     'semi': ['warn', 'always'],
     'quotes': ['warn', 'single'],

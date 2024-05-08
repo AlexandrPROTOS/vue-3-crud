@@ -12,12 +12,6 @@ export const useToDosStore = defineStore('toDosStore', {
       isDone: false,
       isFavorite: false,
     },
-
-    activeModal: {
-      deleteModal: false,
-      createModal: false,
-      task: {},
-    },
   }),
 
   getters: {
@@ -51,23 +45,19 @@ export const useToDosStore = defineStore('toDosStore', {
       toDo.isDone = !toDo.isDone;
     },
 
-    openModalDelete(task) {
-      this.activeModal.task = task;
-      this.activeModal.deleteModal = true;
+    deleteToDo(id) {
+      this.toDos = this.toDos.filter(el => id !== el.id);
     },
 
-    deleteToDo() {
-      this.toDos = this.toDos.filter(el => this.activeModal.task.id !== el.id);
-      this.activeModal.deleteModal = false;
-      this.activeModal.task = {};
+    createToDo(task) {
+      this.toDos.unshift(task);
     },
 
-    createToDo() {
-      this.activeModal.task.isDone = false;
-      this.activeModal.task.id = this.toDos.length + 1;
-      this.toDos.push(this.activeModal.task);
-      this.activeModal.task = {};
-      this.activeModal.createModal = false;
+    saveTaskChanges(task) {
+      const toDo = this.toDos.find(el => el.id === task.id);
+      toDo.title = task.title;
+      toDo.isDone = task.isDone;
+      toDo.isFavorite = task.isFavorite;
     },
   },
 });

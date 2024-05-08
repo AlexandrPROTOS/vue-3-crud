@@ -12,20 +12,56 @@ import { RouterView } from 'vue-router';
   <PageFooter />
 </template>
 
-<style lang="scss">
-main{
+<style lang="scss" scoped>
+:deep(){
+  .el-dialog {
+    padding: 20px;
+
+    &__header{
+      padding: 0;
+    }
+
+    &__headerbtn{
+      width: 61.6px;
+      height: 61.6px;
+    }
+
+    &__footer {
+      margin-top: 40px;
+      padding: 0;
+    }
+
+    &__text{
+      margin: 0;  
+    }
+
+    &__error{
+      margin-bottom: 8px;
+      text-align: left;
+      color: red;
+    }
+
+    &__favorite{
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    &__btns{
+      margin-top: 40px;
+    }
+
+    // Как-то иначе назвать класс. s в btns как будто список, но этот класс назначается элементам (а не спискам).
+    &__btns-delete{
+      width: calc(50% - 6px);
+    }
+  }
+} 
+
+.main{
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-top:  98px;
   padding-bottom: 100px;
-}
-
-.view-header{
-  margin: 0;
-  padding: 0;
-  font-size: 31px;
-  line-height: 36px;
-  color: rgb(0 0 0 );
 }
 </style>
