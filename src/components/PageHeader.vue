@@ -22,6 +22,7 @@ import { RouterLink } from 'vue-router';
 .header{
   position: fixed;
   top: 0;
+  z-index: 1;
   width: 100vw;
   background-color: white;
   box-shadow: 0 0 5px 2px rgb(100 100 111 / 0.2);

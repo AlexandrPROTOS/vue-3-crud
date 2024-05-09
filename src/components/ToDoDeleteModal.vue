@@ -16,6 +16,10 @@ const openDeleteModal = (task) => {
 const deleteToDo = () => {
   toDosStore.deleteToDo(toDo.value.id);
   isShowDeleteModal.value = !isShowDeleteModal.value;
+  ElNotification({
+    title: 'Задача успешно удалена',
+    type: 'success',
+  });
 };
 
 defineExpose({

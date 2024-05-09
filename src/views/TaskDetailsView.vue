@@ -16,11 +16,19 @@ const saveAndRedirect = () => {
   }
   toDosStore.saveTaskChanges(toDo.value);
   router.replace({path: '/tasks'});
+  ElNotification({
+    title: 'Задача успешно изменена',
+    type: 'success',
+  });
 };
 
 const deleteAndRedirect = () => {
   toDosStore.deleteToDo(toDo.value.id);
   router.replace({path: '/tasks'});
+  ElNotification({
+    title: 'Задача успешно удалена',
+    type: 'success',
+  });
 };
 
 const toDo = ref({});

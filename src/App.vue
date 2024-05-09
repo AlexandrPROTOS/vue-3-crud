@@ -50,7 +50,6 @@ import { RouterView } from 'vue-router';
       margin-top: 40px;
     }
 
-    // Как-то иначе назвать класс. s в btns как будто список, но этот класс назначается элементам (а не спискам).
     &__btns-delete{
       width: calc(50% - 6px);
     }
@@ -63,5 +62,10 @@ import { RouterView } from 'vue-router';
   width: 100%;
   padding-top:  98px;
   padding-bottom: 100px;
+
+  @media ( width < 341px) {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
 }
 </style>

@@ -31,6 +31,10 @@
     display: flex;
     justify-content: end;
     gap:40px ;
+
+   @media(width < 341px){
+    justify-content: center;
+   }
   }
 
   &__personal-name{

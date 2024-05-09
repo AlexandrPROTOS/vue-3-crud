@@ -98,6 +98,7 @@ const handleClickCreate = () => {
   }
 
   &__checkbox{
+    z-index: 0;
     margin: 0;
   }
 
@@ -113,5 +114,48 @@ const handleClickCreate = () => {
 
 .btn__task-edit{
   margin-right: 0;
+}
+
+@media (width < 487px){
+  .tasks-view{
+    &__control{
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__control-checkboxes{
+      justify-content: center;
+    }
+
+    &__btn{
+      align-self: center;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+@media (width < 341px){
+  .tasks-view{
+    &__control{
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__control-checkboxes{
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__checkbox{
+      width: 50%;
+    }
+
+    &__btn{
+      align-self: center;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
 }
 </style>

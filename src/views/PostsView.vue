@@ -1,44 +1,21 @@
 <script setup>
 import { POSTS_PER_PAGE } from '@/api/post';
-import { fetchPosts } from '@/api/post';
 import PostItem from '@/components/PostItem.vue';
 import SkeletonItem from '@/components/SkeletonItem.vue';
-import { usePostsStore } from '@/stores/PostsStore';
-import { ref } from 'vue';
+import { usePosts } from '@/composables/post';
 
-const postsStore = usePostsStore();
-const isLoading = ref(false);
-
-const loadNextPage = async () => {
-  isLoading.value = true;
-  const endPost = postsStore.pagesCount * POSTS_PER_PAGE;
-  const startPost = endPost - 4;
-
-  setTimeout(async () => {
-    const result = await fetchPosts(startPost, endPost);
-    postsStore.posts.push(...result);
-    isLoading.value = false;
-    postsStore.pagesCount+=1;
-  }, 500);
-};
-
-if (!postsStore.posts.length) {
-  loadNextPage();
-}
-
+const { isLoading, posts, pagesCount, loadingPosts} = usePosts();
 </script>
 
 <template>
   <h2 class="view-header posts-view">Получение списка всех постов</h2>
-
   <ul class="posts-view__list">
     <PostItem
       class="posts-view__item"
-      v-for="post in postsStore.posts"
+      v-for="post in posts"
       :key="post.id"
       :post="post"
     />
-
     <SkeletonItem 
       class="posts-view__item"
       v-for="n in POSTS_PER_PAGE" 
@@ -52,9 +29,9 @@ if (!postsStore.posts.length) {
     size="large"
     class="posts-view__btn"
     :loading="isLoading"
-    @click="loadNextPage"
+    @click="loadingPosts"
   >
-    Загрузить страницу {{ postsStore.pagesCount }}
+    Загрузить страницу {{ pagesCount }}
   </el-button>
 </template>
 

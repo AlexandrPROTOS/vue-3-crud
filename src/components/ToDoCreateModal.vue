@@ -27,6 +27,10 @@ const createToDo = () => {
   toDo.value.id = Date.now();
   toDosStore.createToDo(toDo.value);
   isShowCreateModal.value = false;
+  ElNotification({
+    title: 'Задача успешно создана',
+    type: 'success',
+  });
 };
 
 defineExpose({
