@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import PostDetails from '../views/PostDetailsView.vue';
 import Posts from '../views/PostsView.vue';
 import TaskDetails from '../views/TaskDetailsView.vue';
@@ -13,7 +13,7 @@ import Tasks from '../views/TasksView.vue';
 
 
 const router = createRouter({
-  history: createWebHistory('/vue-3-crud'),
+  history: createWebHashHistory('/vue-3-crud'),
   routes: [
     {
       path: '/',
