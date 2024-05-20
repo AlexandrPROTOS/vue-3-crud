@@ -11,3 +11,8 @@ app.use(createPinia());
 app.use(router);
 
 app.mount('#app');
+
+export default createRouter({
+  history: createWebHistory('/vue-3-crud'),
+  routes: [],
+});
