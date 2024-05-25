@@ -6,7 +6,7 @@ import Tasks from '../views/TasksView.vue';
 
 const router = createRouter({
   history: createWebHashHistory('/vue-3-crud'),
-  routes: [
+  routes:[
     {
       path: '/',
       name: 'posts',
