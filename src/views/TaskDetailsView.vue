@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import {useToDosStore} from '@/stores/ToDosStore';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';

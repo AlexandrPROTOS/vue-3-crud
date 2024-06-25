@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { fetchPost } from '@/api/post';
 import {ref} from 'vue';
 import {useRoute} from 'vue-router';

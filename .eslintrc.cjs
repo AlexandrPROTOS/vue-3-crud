@@ -69,6 +69,7 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-strongly-recommended',
     'eslint:recommended',
+    '@vue/eslint-config-typescript',
   ],
   plugins: [
     '@stylistic/js',

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import TaskItem from '@/components/TaskItem.vue';
 import ToDoCreateModal from '@/components/ToDoCreateModal.vue'; 
 import ToDoDeleteModal from '@/components/ToDoDeleteModal.vue';

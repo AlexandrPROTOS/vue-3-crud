@@ -1,13 +1,9 @@
-<script setup>
-
-</script>
-
 <template>
   <footer class="footer">
     <div class="main-container footer__main-container">
       <div class="footer__content">
-        <p class="footer__personal-name">Абдуркаев Асадулла</p>
-        <a class="footer__link" href="https://github.com/AsadullahTM" target="_blank">Мой гитхаб</a>
+        <p class="footer__personal-name">Александр Протосов</p>
+        <a class="footer__link" href="https://github.com/AlexandrPROTOS" target="_blank">Мой гитхаб</a>
       </div>
     </div>
   </footer>

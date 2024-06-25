@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { POSTS_PER_PAGE } from '@/api/post';
 import PostItem from '@/components/PostItem.vue';
 import SkeletonItem from '@/components/SkeletonItem.vue';

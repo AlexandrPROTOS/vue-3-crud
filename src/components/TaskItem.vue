@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import {useToDosStore} from '@/stores/ToDosStore';
 
 const toDosStore = useToDosStore();

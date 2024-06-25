@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <li class="skeleton">
     <el-skeleton class="skeleton__block" animated>
