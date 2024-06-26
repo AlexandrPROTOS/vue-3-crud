@@ -64,6 +64,9 @@ module.exports = {
         alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
+
+    // TS:
+    '@typescript-eslint/explicit-function-return-type': 'error',
   },
 
   extends: [

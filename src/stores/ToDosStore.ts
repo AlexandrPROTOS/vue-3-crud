@@ -1,3 +1,4 @@
+import { type ToDo } from '@/helpers/toDo';
 import { todosMock } from '@/mocks/todos';
 import { defineStore } from 'pinia';
 
@@ -12,7 +13,7 @@ export const useToDosStore = defineStore('toDosStore', {
 
   actions: {
     // Изменяем state, как это делали бы во Vue 2 - явно перезаписываем значение, а не мутируем его.
-    toggleIsFavorite(id) {
+    toggleIsFavorite(id: ToDo['id']) {
       const toDoIndex = this.toDos.findIndex((el) => el.id === id);
       const toDoClone = { ...this.toDos[toDoIndex] };
       toDoClone.isFavorite = !toDoClone.isFavorite;
@@ -20,26 +21,31 @@ export const useToDosStore = defineStore('toDosStore', {
       cloneToDos[toDoIndex] = toDoClone;
       this.toDos = cloneToDos;
     },
-    toggleIsDone(id) {
+    toggleIsDone(id: ToDo['id']) {
       const toDo = this.toDos.find((el) => el.id === id);
-      toDo.isDone = !toDo.isDone;
+      if (toDo) {
+        toDo.isDone = !toDo.isDone;
+      }
     },
-    deleteToDo(id) {
+    deleteToDo(id: ToDo['id']) {
       this.toDos = this.toDos.filter((el) => id !== el.id);
     },
-    createToDo(task) {
+    createToDo(task: ToDo) {
       this.toDos.unshift(task);
     },
-    saveTaskChanges(task) {
+    saveTaskChanges(task: ToDo) {
       const toDo = this.toDos.find((el) => el.id === task.id);
-      toDo.title = task.title;
-      toDo.isDone = task.isDone;
-      toDo.isFavorite = task.isFavorite;
+      if (toDo) {
+        toDo.title = task.title;
+        toDo.isDone = task.isDone;
+        toDo.isFavorite = task.isFavorite;
+      }
+      
     },
   },
 
   getters: {
-    filteredToDos() {
+    filteredToDos(): ToDo[] {
       let filteredToDos = this.toDos;
       if (this.activeFilter.isDone) {
         filteredToDos = filteredToDos.filter((el) => el.isDone);

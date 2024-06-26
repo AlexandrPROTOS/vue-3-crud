@@ -1,14 +1,15 @@
 <script setup lang='ts'>
 import { fetchPost } from '@/api/post';
+import { type Post, postTemplate } from '@/helpers/post';
 import {ref} from 'vue';
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
 const isLoading = ref(false);
-const post = ref({});
+const post = ref<Post>({ ...postTemplate });
 
-const loadPost =  () => {
-  const postId = route.params.id;
+const loadPost =  (): void => {
+  const postId = route.params.id as string;
   isLoading.value = true;
   setTimeout(async () => {
     const result = await fetchPost(postId);

@@ -2,20 +2,21 @@
 import TaskItem from '@/components/TaskItem.vue';
 import ToDoCreateModal from '@/components/ToDoCreateModal.vue'; 
 import ToDoDeleteModal from '@/components/ToDoDeleteModal.vue';
+import { type ToDo } from '@/helpers/toDo';
 import {useToDosStore} from '@/stores/ToDosStore';
 import { ref } from 'vue';
 
 const toDosStore = useToDosStore();
 
-const deleteModal = ref(null);
-const createModal = ref(null);
+const deleteModal = ref<typeof ToDoDeleteModal>();
+const createModal = ref<typeof ToDoCreateModal>();
 
-const handleClickDelete = (task) => {
-  deleteModal.value.openDeleteModal(task);
+const handleClickDelete = (task: ToDo): void => {
+  deleteModal.value?.openDeleteModal(task);
 };
 
-const handleClickCreate = () => {
-  createModal.value.openCreateModal();
+const handleClickCreate = (): void => {
+  createModal.value?.openCreateModal();
 };
 </script>
 

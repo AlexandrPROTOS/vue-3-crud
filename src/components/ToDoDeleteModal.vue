@@ -1,19 +1,21 @@
 <script setup lang='ts'>
+import { type ToDo,  toDoTemplate } from '@/helpers/toDo';
 import {useToDosStore} from '@/stores/ToDosStore';
+import { ElNotification } from 'element-plus';
 import { ref } from 'vue';
 
 const toDosStore = useToDosStore();
 
 const isShowDeleteModal = ref(false);
-const toDo = ref({});
+const toDo = ref<ToDo>({ ...toDoTemplate });
 
 
-const openDeleteModal = (task) => {
+const openDeleteModal = (task: ToDo): void => {
   isShowDeleteModal.value = true;
   toDo.value = task;
 };
 
-const deleteToDo = () => {
+const deleteToDo = (): void => {
   toDosStore.deleteToDo(toDo.value.id);
   isShowDeleteModal.value = !isShowDeleteModal.value;
   ElNotification({

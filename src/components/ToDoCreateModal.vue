@@ -1,25 +1,23 @@
 <script setup lang='ts'>
+import { type ToDo, toDoTemplate } from '@/helpers/toDo';
 import {useToDosStore} from '@/stores/ToDosStore';
+import { ElNotification } from 'element-plus';
 import { ref } from 'vue';
 
 const toDosStore = useToDosStore();
 
 const isShowCreateModal = ref(false);
-const toDo = ref({});
 
-const openCreateModal = () => {
+const toDo = ref<ToDo>({ ...toDoTemplate });
+
+const openCreateModal = (): void => {
   isShowCreateModal.value = true;
-  toDo.value = {
-    title: '',
-    id: 0,
-    isFavorite: false,
-    isDone: false,
-  };
+  toDo.value = { ...toDoTemplate };
 };
 
 const isTitleEmpty = ref(false);
 
-const createToDo = () => {
+const createToDo = (): void => {
   if (!toDo.value.title) {
     isTitleEmpty.value = true;
     return;

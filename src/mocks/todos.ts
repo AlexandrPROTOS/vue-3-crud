@@ -1,4 +1,6 @@
-const todosMock = [
+import { type ToDo } from '@/helpers/toDo';
+
+const todosMock: ToDo[] = [
   {
     id: 4,
     title: 'Проверить почту',

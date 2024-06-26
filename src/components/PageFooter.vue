@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="main-container footer__main-container">
       <div class="footer__content">
-        <p class="footer__personal-name">Александр Протосов</p>
+        <p class="footer__personal-name">Александр Протасов</p>
         <a class="footer__link" href="https://github.com/AlexandrPROTOS" target="_blank">Мой гитхаб</a>
       </div>
     </div>

@@ -1,5 +1,7 @@
 <script setup lang='ts'>
+import { type ToDo, toDoTemplate } from '@/helpers/toDo';
 import {useToDosStore} from '@/stores/ToDosStore';
+import { ElNotification } from 'element-plus';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -8,8 +10,9 @@ const route = useRoute();
 const toDosStore = useToDosStore();
 
 const isTitleEmpty = ref(false);
+const toDo = ref<ToDo>({ ...toDoTemplate });
 
-const saveAndRedirect = () => {
+const saveAndRedirect = (): void => {
   if (!toDo.value.title) {
     isTitleEmpty.value = true;
     return;
@@ -22,7 +25,7 @@ const saveAndRedirect = () => {
   });
 };
 
-const deleteAndRedirect = () => {
+const deleteAndRedirect = (): void => {
   toDosStore.deleteToDo(toDo.value.id);
   router.replace({path: '/tasks'});
   ElNotification({
@@ -31,14 +34,13 @@ const deleteAndRedirect = () => {
   });
 };
 
-const toDo = ref({});
-
-const findToDo = () => {
+const findToDo = (): void => {
   const task = toDosStore.toDos.find(el => el.id ===  Number(route.params.id));
-  if (!task) {
-    router.replace({path: '/tasks'});
+  if (task) {
+    toDo.value = {...task};
+    return;
   }
-  toDo.value = {...task};
+  router.replace({path: '/tasks'});
 };
 
 findToDo();
