@@ -4,7 +4,7 @@ import PostItem from '@/components/PostItem.vue';
 import SkeletonItem from '@/components/SkeletonItem.vue';
 import { usePosts } from '@/composables/post';
 
-const { isLoading, posts, pagesCount, loadingPosts} = usePosts();
+const { isLoading, posts, pagesCount, loadPosts } = usePosts();
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const { isLoading, posts, pagesCount, loadingPosts} = usePosts();
     size="large"
     class="posts-view__btn"
     :loading="isLoading"
-    @click="loadingPosts"
+    @click="loadPosts"
   >
     Загрузить страницу {{ pagesCount }}
   </el-button>

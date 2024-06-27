@@ -3,7 +3,7 @@ import TaskItem from '@/components/TaskItem.vue';
 import ToDoCreateModal from '@/components/ToDoCreateModal.vue'; 
 import ToDoDeleteModal from '@/components/ToDoDeleteModal.vue';
 import { type ToDo } from '@/helpers/toDo';
-import {useToDosStore} from '@/stores/ToDosStore';
+import { useToDosStore } from '@/stores/ToDosStore';
 import { ref } from 'vue';
 
 const toDosStore = useToDosStore();

@@ -28,7 +28,6 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-
 .post{
   &__router-link{
     display: flex;
@@ -71,5 +70,4 @@ defineProps({
     line-height: 16px;
   }
 }
-
 </style>

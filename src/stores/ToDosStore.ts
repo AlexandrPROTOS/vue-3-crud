@@ -40,7 +40,6 @@ export const useToDosStore = defineStore('toDosStore', {
         toDo.isDone = task.isDone;
         toDo.isFavorite = task.isFavorite;
       }
-      
     },
   },
 

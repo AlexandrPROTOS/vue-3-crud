@@ -1,13 +1,13 @@
 export type Post = {
-  id: number, 
-  title: string, 
-  body: string, 
+  id: number,
+  title: string,
+  body: string,
   userId: number,
 };
 
 export const postTemplate = {
-  id: 0, 
-  title: '', 
-  body: '', 
+  id: 0,
+  title: '',
+  body: '',
   userId: 0,
 };

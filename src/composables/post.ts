@@ -8,13 +8,13 @@ type UsePostsReturns = {
   isLoading: Ref<boolean>,
   posts: Ref<Post[]>,
   pagesCount: Ref<number>,
-  loadingPosts: () => void,
+  loadPosts: () => void,
 }
 export const usePosts = (): UsePostsReturns => {
   const postsStore = usePostsStore();
   const { posts, pagesCount } = storeToRefs(postsStore);
 
-  const loadingPosts = (): void => {
+  const loadPosts = (): void => {
     isLoading.value = true;
     setTimeout(async () => {
       await postsStore.addPostsInState();
@@ -23,14 +23,14 @@ export const usePosts = (): UsePostsReturns => {
   };
 
   if (!isLoading.value && pagesCount.value === 1) {
-    loadingPosts();
+    loadPosts();
   }
   
   return {
     isLoading,
     posts,
     pagesCount,
-    loadingPosts,
+    loadPosts,
   };
 };
 

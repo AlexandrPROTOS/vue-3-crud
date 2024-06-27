@@ -1,7 +1,7 @@
 {
   "workbench.iconTheme": "material-icon-theme",
   "files.eol": "\n",
-  "eslint.format.enable": false,
+  "eslint.format.enable": true,
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },

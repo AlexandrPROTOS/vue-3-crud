@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { type ToDo, toDoTemplate } from '@/helpers/toDo';
-import {useToDosStore} from '@/stores/ToDosStore';
+import { useToDosStore } from '@/stores/ToDosStore';
 import { ElNotification } from 'element-plus';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -18,7 +18,7 @@ const saveAndRedirect = (): void => {
     return;
   }
   toDosStore.saveTaskChanges(toDo.value);
-  router.replace({path: '/tasks'});
+  router.replace({ path: '/tasks' });
   ElNotification({
     title: 'Задача успешно изменена',
     type: 'success',
@@ -27,7 +27,7 @@ const saveAndRedirect = (): void => {
 
 const deleteAndRedirect = (): void => {
   toDosStore.deleteToDo(toDo.value.id);
-  router.replace({path: '/tasks'});
+  router.replace({ path: '/tasks' });
   ElNotification({
     title: 'Задача успешно удалена',
     type: 'success',
@@ -44,9 +44,6 @@ const findToDo = (): void => {
 };
 
 findToDo();
-
-
-
 </script>
 
 <template>

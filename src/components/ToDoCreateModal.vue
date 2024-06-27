@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { type ToDo, toDoTemplate } from '@/helpers/toDo';
-import {useToDosStore} from '@/stores/ToDosStore';
+import { useToDosStore } from '@/stores/ToDosStore';
 import { ElNotification } from 'element-plus';
 import { ref } from 'vue';
 
@@ -34,7 +34,6 @@ const createToDo = (): void => {
 defineExpose({
   openCreateModal,
 });
-
 </script>
 
 <template>

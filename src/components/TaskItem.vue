@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { type ToDo } from '@/helpers/toDo';
-import {useToDosStore} from '@/stores/ToDosStore';
+import { useToDosStore } from '@/stores/ToDosStore';
 import type { PropType } from 'vue';
 
 const toDosStore = useToDosStore();
@@ -18,7 +18,7 @@ defineProps({
   },
 });
 
-const emit = defineEmits<{
+defineEmits<{
   clickDelete: [task: ToDo]
 }>();
 </script>
@@ -43,7 +43,7 @@ const emit = defineEmits<{
       <el-button
         type="danger"
         class="task__btn-delete"
-        @click.stop="emit('clickDelete', task)"
+        @click.stop="$emit('clickDelete', task)"
       >
         Удалить
       </el-button>
@@ -52,7 +52,6 @@ const emit = defineEmits<{
 </template>
 
 <style lang="scss" scoped>
-
 .task{
   display: flex;
   flex-direction: column;
@@ -69,19 +68,19 @@ const emit = defineEmits<{
 
   &__line1,
   &__line2{
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
   }
 
   &__line1{
-  height: 38px;
+    height: 38px;
   }
 
   &__name{
-  margin: 0;
-  padding: 0;
-  font-size: 18px;
-  line-height: 22px;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 22px;
   }
 
   &__btn-favorite{
@@ -95,8 +94,8 @@ const emit = defineEmits<{
   }
 
   &__line2{
-  height: 32px;
-  margin-top: 12px;
+    height: 32px;
+    margin-top: 12px;
   }
 
   &__router-link{
@@ -109,8 +108,8 @@ const emit = defineEmits<{
   }
 
   &__router-link:hover{
-  border-bottom: 1px solid rgb(0 0 0);
-  transition: 0.15s ease;
+    border-bottom: 1px solid rgb(0 0 0);
+    transition: 0.15s ease;
   }
 
   &__router-link:visited{
@@ -143,7 +142,6 @@ const emit = defineEmits<{
         opacity: 0.8;
       }
     }
-
   }
 
   &--favorite {
@@ -152,5 +150,4 @@ const emit = defineEmits<{
     }
   }
 }
-
 </style>
