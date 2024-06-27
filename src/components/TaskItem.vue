@@ -1,13 +1,15 @@
 <script setup lang='ts'>
+import { type ToDo } from '@/helpers/toDo';
 import {useToDosStore} from '@/stores/ToDosStore';
+import type { PropType } from 'vue';
 
 const toDosStore = useToDosStore();
 
 defineProps({
   task: {
-    type: Object,
+    type: Object as PropType<ToDo>,
     required: true,
-    validator({id, title, isDone, isFavorite}) {
+    validator({ id, title, isDone, isFavorite }: ToDo) {
       return id !== undefined
         && typeof title === 'string'
         && typeof isDone === 'boolean'
@@ -16,7 +18,9 @@ defineProps({
   },
 });
 
-defineEmits(['clickDelete']);
+const emit = defineEmits<{
+  clickDelete: [task: ToDo]
+}>();
 </script>
 
 <template>
@@ -39,7 +43,7 @@ defineEmits(['clickDelete']);
       <el-button
         type="danger"
         class="task__btn-delete"
-        @click.stop="$emit('clickDelete', task)"
+        @click.stop="emit('clickDelete', task)"
       >
         Удалить
       </el-button>

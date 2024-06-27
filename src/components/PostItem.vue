@@ -1,15 +1,17 @@
 <script setup lang='ts'>
+import { type Post } from '@/helpers/post';
+import type { PropType } from 'vue';
 import { RouterLink } from 'vue-router';
 
 defineProps({
   post: {
-    type: Object,
+    type: Object as PropType<Post>,
     required: true,
-    validator({ id, title, body, userId }) {
+    validator({ id, title, body, userId }: Post) {
       return id !== undefined
         && userId !== undefined
-        && title.length && typeof title === 'string'
-        && body.length && typeof body === 'string';
+        && typeof title === 'string' && Boolean(title.length) 
+        && typeof body === 'string' && Boolean(body.length);
     },
   },
 });
