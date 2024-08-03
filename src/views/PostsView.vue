@@ -40,6 +40,7 @@ const { isLoading, posts, pagesCount, loadPosts } = usePosts();
   &__list{
     display: flex;
     flex-wrap: wrap;
+    align-items: stretch;
     list-style: none;
     margin: 0;
     margin-top: 28px;
@@ -48,6 +49,7 @@ const { isLoading, posts, pagesCount, loadPosts } = usePosts();
   }
 
   &__item {
+    display: flex;
     width: calc(50% - 10px);
   }
 

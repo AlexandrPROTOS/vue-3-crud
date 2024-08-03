@@ -65,6 +65,7 @@ defineProps({
   }
 
   &__id{
+    margin-top: auto;
     margin-left: auto;
     font-size: 13px;
     line-height: 16px;
